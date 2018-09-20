@@ -92,7 +92,7 @@
                     numberOfCorrectLetters = numberOfCorrectLetters + 1;
                 }
                 else {
-                    slotWord.push("_");
+                    slotWord.push("_ ");
                 }
                 guessWord.push("*");
             }
@@ -104,11 +104,12 @@
             startMsgJ.textContent = "Select a letter.";
             winTotalJ.textContent = winTotal;
             
-            guessWordJ.textContent = guessWord.join(" ");
-
+            // guessWordJ.textContent = guessWord.join(" ");
+            guessWordJ.textContent = guessWord;
             
 
-            slotWordJ.textContent = slotWord.join(" ");
+            // slotWordJ.textContent = slotWord.join(" ");
+            slotWordJ.textContent = slotWord;
 
             
             guessesRemainingJ.textContent = [" "];
