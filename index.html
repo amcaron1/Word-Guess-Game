@@ -5,21 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <!-- <script src="assets/javascript/game.js"></script> -->
+
 </head>
 
 <body>
-        <h1>Welcome to Movie Hangman</h1>
-        <h1 id="startMsgH">Select any key to start a new game.</h1>
+        <h1 id="gameBannerH">Welcome to Movie Hangman</h1>
+        <h1 id="startMsgH">Select any key to start a new game</h1>
         <h1 id="winsBannerH">Wins</h1>
         <h1 id="winTotalH">0</h1>
-        <h1 id= movieBannerH>Movie Name</h1>
-        <h1 id= guessWordH></h1>
+        <h1 id="movieBannerH">Movie Name</h1>
+        <h1 id="guessWordH"></h1>
         <h1 id="slotWordH"></h1>
         <h1 id="guessBannerH">Number of Guesses Remaining</h1>
         <h1 id="guessesRemainingH">0</h1>
-        <h1 id="lettersBannerH">Letters Previously Guessed</h1>
+        <h1 id="lettersBannerH">Letters Guessed</h1>
         <h1 id="lettersGuessedH"></h1>
         <h1 id="bottomMsgH"></h1>
     
@@ -30,7 +31,6 @@
         var winTotal = 0;
         var playing = false;
         var alpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-    
         var currentChar = "";
         var randomNumber = -1;
         var currentWord = "";
@@ -39,7 +39,6 @@
         var guessWord = [];
         var slotWord = [];
         var numberOfCorrectLetters = 0;
-    
         var startMsgJ = document.getElementById("startMsgH");
         var winTotalJ = document.getElementById("winTotalH");
         var guessWordJ = document.getElementById("guessWordH");
@@ -52,16 +51,12 @@
         document.onkeyup = function(event) {
             if (playing) {
                 currentChar = event.key.toLowerCase();
-
-                console.log("currentChar = ",currentChar);
-                
                 if (checkLetter(currentChar)) {
-                    console.log("checkNewLetter = ", checkNewLetter(currentChar));
                     if (checkNewLetter(currentChar)) {
                         updateGame();
                     }
                     else {
-                        bottomMsgJ.textContent = "You already guessed that letter.";
+                        bottomMsgJ.textContent = "You already guessed that letter";
                     }
                 }
                 else {
@@ -84,35 +79,23 @@
             numberOfCorrectLetters = 0;
             
             console.log("currentWord = ",currentWord);
-            console.log("currentWord.length = ",currentWord.length);
 
             for (var i = 0; i < currentWord.length; i++) {
                 if (currentWord[i] == " "){
-                    slotWord.push(" ");
+                    slotWord.push("&nbsp");
+                    guessWord.push("&nbsp");
                     numberOfCorrectLetters = numberOfCorrectLetters + 1;
                 }
                 else {
                     slotWord.push("_ ");
+                    guessWord.push("&nbsp ");
                 }
-                guessWord.push("*");
             }
             
-            console.log("guessWord = ",guessWord);
-            console.log("slotWord = ",slotWord);
-            
-
-            startMsgJ.textContent = "Select a letter.";
-            winTotalJ.textContent = winTotal;
-            
-            // guessWordJ.textContent = guessWord.join(" ");
-            guessWordJ.textContent = guessWord;
-            
-
-            // slotWordJ.textContent = slotWord.join(" ");
-            slotWordJ.textContent = slotWord;
-
-            
-            guessesRemainingJ.textContent = [" "];
+            startMsgJ.textContent = "Select a letter";
+            guessWordJ.innerHTML = guessWord.join("");
+            slotWordJ.innerHTML = slotWord.join("");
+            guessesRemainingJ.textContent = guessesRemaining;
             lettersGuessedJ.textContent = lettersGuessed;
             bottomMsgJ.textContent = "";
         }
@@ -130,7 +113,6 @@
     
         function checkNewLetter(char) {
             var newLetter = true;
-            console.log("lettersGuessed.length = ",lettersGuessed.length)
             for (var i = 0; i < lettersGuessed.length; i++) {
                 if (char == lettersGuessed[i]) {
                     newLetter = false;
@@ -144,10 +126,9 @@
             var correctLetter = false;
             for (var i = 0; i < currentWord.length; i++) {
                 if (char == currentWord.charAt(i)) {
-                    guessWord[i] = char;
+                    guessWord[i] = char + " ";
                     numberOfCorrectLetters = numberOfCorrectLetters + 1;
                     correctLetter = true;
-                    console.log("ccl", i)
                 }
             }
             return correctLetter;
@@ -156,13 +137,11 @@
         function updateGame() {
             guessesRemaining = guessesRemaining - 1;
             lettersGuessed.push(currentChar);
-            console.log("guessWord = ",guessWord);
             guessesRemainingJ.textContent = guessesRemaining;
             lettersGuessedJ.textContent = lettersGuessed;
-            
 
             if (checkCorrectLetter(currentChar)) {
-                guessWordJ.textContent = guessWord.join(" ");
+                guessWordJ.innerHTML = guessWord.join("");
                 if (numberOfCorrectLetters == currentWord.length) {
                     win();
                 }
@@ -171,7 +150,7 @@
                         lose();
                     }
                     else{
-                        bottomMsgJ.textContent = "Good one.";
+                        bottomMsgJ.textContent = "Good one";
                     }
             }
             else {
@@ -179,14 +158,14 @@
                     lose();
                 }
                 else{
-                    bottomMsgJ.textContent = "Not quite.";
+                    bottomMsgJ.textContent = "Not quite";
                 }
             }
         }
     
         function win() {
             winTotal = winTotal + 1;
-            startMsgJ.textContent = "Select any key to start a new game.";
+            startMsgJ.textContent = "Select any key to start a new game";
             winTotalJ.textContent = winTotal;
             bottomMsgJ.textContent = "Congratulations!  You won!";
     
@@ -194,8 +173,8 @@
         }
     
         function lose() {
-            startMsgJ.textContent = "Select any key to start a new game.";
-            bottomMsgJ.textContent = "Bummer.  You lost.";
+            startMsgJ.textContent = "Select any key to start a new game";
+            bottomMsgJ.textContent = "Bummer!  You lost!";
     
             playing = false;
         }
