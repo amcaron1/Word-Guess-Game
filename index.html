@@ -11,18 +11,34 @@
 </head>
 
 <body>
+    <main class="main-wrapper">
+    <div class="box">
         <h1 id="gameBannerH">Welcome to Movie Hangman</h1>
-        <h1 id="startMsgH">Select any key to start a new game</h1>
-        <h1 id="winsBannerH">Wins</h1>
-        <h1 id="winTotalH">0</h1>
-        <h1 id="movieBannerH">Movie Name</h1>
-        <h1 id="guessWordH"></h1>
-        <h1 id="slotWordH"></h1>
-        <h1 id="guessBannerH">Number of Guesses Remaining</h1>
-        <h1 id="guessesRemainingH">0</h1>
-        <h1 id="lettersBannerH">Letters Guessed</h1>
-        <h1 id="lettersGuessedH"></h1>
-        <h1 id="bottomMsgH"></h1>
+    </div>
+    <div class="box">
+        <h3 id="startMsgH">Select any key to start a new game</h3>
+    </div>
+    <div class="box">
+        <h3 id="winsBannerH">Wins</h3>
+        <h3 id="winTotalH">0</h3>
+    </div>
+    <div class="nobox">
+        <h3 id="movieBannerH">Movie Name</h3>
+        <h2 id="guessWordH">&nbsp</h2>
+        <h2 id="slotWordH">&nbsp</h2>
+    </div>
+    <div class="box">
+        <h3 id="guessBannerH">Number of Guesses Remaining</h3>
+        <h3 id="guessesRemainingH">0</h3>
+    </div>
+    <div class="box">
+        <h3 id="lettersBannerH">Letters Guessed</h3>
+        <h3 id="lettersGuessedH">&nbsp</h3>
+    </div>
+    <div class="box">
+        <h3 id="bottomMsgH">&nbsp</h3>
+    </div>
+    </main>
     
     <script>
     
@@ -73,7 +89,7 @@
             randomNumber = Math.floor(Math.random() * 10);  
             currentWord = words[randomNumber];
             guessesRemaining = 15;
-            lettersGuessed = [];
+            lettersGuessed = ["none"];
             guessWord = [];
             slotWord = [];
             numberOfCorrectLetters = 0;
@@ -97,7 +113,7 @@
             slotWordJ.innerHTML = slotWord.join("");
             guessesRemainingJ.textContent = guessesRemaining;
             lettersGuessedJ.textContent = lettersGuessed;
-            bottomMsgJ.textContent = "";
+            bottomMsgJ.textContent = "Good Luck";
         }
     
         function checkLetter(char) {
@@ -135,8 +151,12 @@
         }
     
         function updateGame() {
-            guessesRemaining = guessesRemaining - 1;
+            if (guessesRemaining == 15) {
+                lettersGuessed = [];
+            }
+
             lettersGuessed.push(currentChar);
+            guessesRemaining = guessesRemaining - 1;
             guessesRemainingJ.textContent = guessesRemaining;
             lettersGuessedJ.textContent = lettersGuessed;
 

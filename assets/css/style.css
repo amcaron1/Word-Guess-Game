@@ -1,18 +1,37 @@
+.main-wrapper{
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: #ffffff;
+    max-width: 960px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #dddddd;
+}
+
+h3 {
+    margin: 6px;
+}
+.box{
+    border: solid 2px black;
+    width: 500px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 #gameBannerH{
-    font-size: 40px;
+    text-align: center;
 }
 
 #guessWordH{
     font-family: 'Courier New', Courier, monospace;
-    font-size: 40px;
     margin-bottom: 0px;
     position: relative;
-    top: 40px;
+    top: 20px;
 }
 
 #slotWordH{
     font-family: 'Courier New', Courier, monospace;
-    font-size: 40px;
     margin-top: 0px;
 }
 
