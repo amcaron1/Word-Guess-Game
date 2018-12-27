@@ -1,6 +1,9 @@
-        var words = ["the godfather", "star wars", "indiana jones", "rocky", "the good the bad and the ugly",
+$(document).ready(function() {
+
+var words = ["the godfather", "star wars", "indiana jones", "rocky", "the good the bad and the ugly",
             "jaws", "ghostbusters", "mission impossible", "back to the future", "superman"];
         var winTotal = 0;
+        var lossTotal = 0;
         var playing = false;
         var alpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
         var currentChar = "";
@@ -13,6 +16,7 @@
         var numberOfCorrectLetters = 0;
         var startMsgJ = document.getElementById("startMsgH");
         var winTotalJ = document.getElementById("winTotalH");
+        var lossTotalJ = document.getElementById("lossTotalH");
         var guessWordJ = document.getElementById("guessWordH");
         var slotWordJ = document.getElementById("slotWordH");
         var guessesRemainingJ = document.getElementById("guessesRemainingH");
@@ -45,7 +49,7 @@
             randomNumber = Math.floor(Math.random() * 10);  
             currentWord = words[randomNumber];
             guessesRemaining = 15;
-            lettersGuessed = [];
+            lettersGuessed = ["none"];
             guessWord = [];
             slotWord = [];
             numberOfCorrectLetters = 0;
@@ -69,18 +73,18 @@
             slotWordJ.innerHTML = slotWord.join("");
             guessesRemainingJ.textContent = guessesRemaining;
             lettersGuessedJ.textContent = lettersGuessed;
-            bottomMsgJ.textContent = "";
+            bottomMsgJ.textContent = "Good Luck";
         }
     
         function checkLetter(char) {
-        var validLetter = false;
-        for (var i = 0; i < 26; i++) {
-            if (char == alpha[i]) {
-                validLetter = true;
-                return validLetter;
+            var validLetter = false;
+            for (var i = 0; i < 26; i++) {
+                if (char == alpha[i]) {
+                    validLetter = true;
+                    return validLetter;
+                }
             }
-        }
-        return validLetter;
+            return validLetter;
         }
     
         function checkNewLetter(char) {
@@ -107,10 +111,14 @@
         }
     
         function updateGame() {
-            guessesRemaining = guessesRemaining - 1;
+            if (guessesRemaining == 15) {
+                lettersGuessed = [];
+            }
+
             lettersGuessed.push(currentChar);
+            guessesRemaining = guessesRemaining - 1;
             guessesRemainingJ.textContent = guessesRemaining;
-            lettersGuessedJ.textContent = lettersGuessed;
+            lettersGuessedJ.textContent = lettersGuessed.join(" ");
 
             if (checkCorrectLetter(currentChar)) {
                 guessWordJ.innerHTML = guessWord.join("");
@@ -145,8 +153,12 @@
         }
     
         function lose() {
+            lossTotal = lossTotal + 1;
             startMsgJ.textContent = "Select any key to start a new game";
+            lossTotalJ.textContent = lossTotal;
             bottomMsgJ.textContent = "Bummer!  You lost!";
     
             playing = false;
         }
+
+    })

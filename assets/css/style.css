@@ -1,26 +1,63 @@
-.main-wrapper{
-    margin-left: 40px;
-    margin-right: 40px;
-    background-color: #ffffff;
-    max-width: 960px;
-    border-style: solid;
-    border-width: 0.5px;
-    border-color: #dddddd;
+body{
+    background-image: url("../images/white1.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+.header-wrapper{
+    background-image: url("../images/filmstrip3.png");
+    background-position: top;
+    background-repeat: repeat-x;
+    background-size: 20%;
+    background-attachment: fixed;
+    padding-top: 40px;
+    padding-bottom: 20px;
+  }
+
+.footer-wrapper{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-image: url("../images/filmstrip3.png");
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 20%;
+    padding-top: 20px;
+    padding-bottom: 40px;
 }
 
-h3 {
-    margin: 6px;
+.popcornLeft {
+    background-image: url("../images/popcorn5.png");
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: 25%;
+    background-color: unset;
 }
+
+.popcornRight {
+    background-image: url("../images/popcorn5.png");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 25%;
+    background-color: unset;
+}
+
 .box{
     border: solid 2px black;
-    width: 500px;
     margin-bottom: 15px;
     padding-left: 10px;
     padding-right: 10px;
+    text-align: center;
+    word-wrap: break-word;
 }
 
-#gameBannerH{
+.noBox{
     text-align: center;
+    margin-bottom: 20px;
 }
 
 #guessWordH{
@@ -35,3 +72,26 @@ h3 {
     margin-top: 0px;
 }
 
+.banner {
+    text-align: center;
+}
+
+#guessBannerH {
+    text-decoration: underline;
+}
+
+#lettersBannerH {
+    text-decoration: underline;
+}
+
+#messageBannerH {
+    text-decoration: underline;
+}
+
+h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#movieBannerH {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
