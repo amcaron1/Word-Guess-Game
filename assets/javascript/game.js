@@ -1,6 +1,17 @@
 $(document).ready(function() {
 
-    var words = ["the godfather", "star wars", "indiana jones", "rocky", "the good the bad and the ugly", "jaws", "ghostbusters", "mission impossible", "back to the future", "superman"];
+    var words = [
+        {title: "the godfather", themeSong: "assets/sound/TheGodfather.mp3"},
+        {title: "star wars", themeSong: "assets/sound/StarWars.mp3"},
+        {title: "indiana jones", themeSong: "assets/sound/IndianaJones.mp3"},
+        {title: "rocky", themeSong: "assets/sound/Rocky.mp3"},
+        {title: "the good the bad and the ugly", themeSong: "assets/sound/TheGoodTheBadAndTheUgly.mp3"},
+        {title: "jaws", themeSong: "assets/sound/Jaws.mp3"},
+        {title: "ghostbusters", themeSong: "assets/sound/Ghostbusters.mp3"},
+        {title: "mission impossible", themeSong: "assets/sound/MissionImpossible.mp3"},
+        {title: "back to the future", themeSong: "assets/sound/BackToTheFuture.mp3"},
+        {title: "superman", themeSong: "assets/sound/Superman.mp3"}]
+
     var winTotal = 0;
     var lossTotal = 0;
     var playing = false;
@@ -46,7 +57,7 @@ $(document).ready(function() {
 
     function resetGame() {
         randomNumber = Math.floor(Math.random() * 10);  
-        currentWord = words[randomNumber];
+        currentWord = words[randomNumber].title;
         guessesRemaining = 15;
         lettersGuessed = ["none"];
         guessWord = [];
@@ -147,8 +158,43 @@ $(document).ready(function() {
         startMsgJ.textContent = "Select any key to start a new game";
         winTotalJ.textContent = winTotal;
         bottomMsgJ.textContent = "Congratulations!  You won!";
-
         playing = false;
+        var audio = new Audio(words[randomNumber].themeSong);
+        var decrement = 0.2;
+        audio.play();
+
+        // setTimeout executes the statements after 10 seconds
+        // So after 10 seconds, the theme song is stopped
+        setTimeout(function() {
+            console.log("audio.volume = ", audio.volume);
+            interval1 = setInterval(fade1, 1000);
+            
+        }, 10000);
+
+        function fade1() {
+        
+            if (audio.volume >= 0.6) {
+                audio.volume -= decrement;
+                console.log("decrement audio.volume = ", audio.volume);
+            }
+            else {
+                decrement = 0.05;
+                interval2 = setInterval(fade2, 1000);
+                clearInterval(interval1);
+            }
+        }
+
+        function fade2() {
+
+            audio.volume -= decrement;
+            console.log("decrement audio.volume = ", audio.volume);
+        
+            if (audio.volume <= 0.05) {
+                clearInterval(interval2);
+                audio.pause();
+            }
+        }
+
     }
 
     function lose() {
@@ -156,7 +202,6 @@ $(document).ready(function() {
         startMsgJ.textContent = "Select any key to start a new game";
         lossTotalJ.textContent = lossTotal;
         bottomMsgJ.textContent = "Bummer!  You lost!";
-
         playing = false;
     }
 
