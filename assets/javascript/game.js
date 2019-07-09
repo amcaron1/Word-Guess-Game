@@ -191,7 +191,7 @@ $(document).ready(function() {
             audio.volume -= decrement;
             console.log("audio.volume = ", audio.volume);
         
-            if (audio.volume <= 0.05) {
+            if (audio.volume <= 0.06) {
                 clearInterval(interval2);
                 audio.pause();
             }
