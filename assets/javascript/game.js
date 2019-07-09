@@ -32,9 +32,11 @@ $(document).ready(function() {
     var guessesRemainingJ = document.getElementById("guessesRemainingH");
     var lettersGuessedJ = document.getElementById("lettersGuessedH");
     var bottomMsgJ = document.getElementById("bottomMsgH");
+    var audio = new Audio(words[0].themeSong);
 
 
     document.onkeyup = function(event) {
+        audio.pause();
         if (playing) {
             currentChar = event.key.toLowerCase();
             if (checkLetter(currentChar)) {
@@ -159,12 +161,12 @@ $(document).ready(function() {
         winTotalJ.textContent = winTotal;
         bottomMsgJ.textContent = "Congratulations!  You won!";
         playing = false;
-        var audio = new Audio(words[randomNumber].themeSong);
+        audio = new Audio(words[randomNumber].themeSong);
         var decrement = 0.2;
         audio.play();
 
         // setTimeout executes the statements after 10 seconds
-        // So after 10 seconds, the theme song is stopped
+        // So after 10 seconds, the theme song is faded out
         setTimeout(function() {
             console.log("audio.volume = ", audio.volume);
             interval1 = setInterval(fade1, 1000);
@@ -175,7 +177,7 @@ $(document).ready(function() {
         
             if (audio.volume >= 0.6) {
                 audio.volume -= decrement;
-                console.log("decrement audio.volume = ", audio.volume);
+                console.log("audio.volume = ", audio.volume);
             }
             else {
                 decrement = 0.05;
@@ -187,7 +189,7 @@ $(document).ready(function() {
         function fade2() {
 
             audio.volume -= decrement;
-            console.log("decrement audio.volume = ", audio.volume);
+            console.log("audio.volume = ", audio.volume);
         
             if (audio.volume <= 0.05) {
                 clearInterval(interval2);
